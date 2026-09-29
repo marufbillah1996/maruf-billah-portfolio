@@ -1,0 +1,46 @@
+<div class="min-h-screen bg-[#090a0f] text-slate-100 flex flex-col font-sans selection:bg-amber-500/30 selection:text-amber-200">
+  
+  <!-- Global Top Bar Contract Navigation -->
+  <app-header />
+
+  <!-- Main Content Sequence -->
+  <main class="flex-1">
+    <app-hero />
+    <app-gallery />
+    <app-albums />
+    <app-cv-section />
+    <app-contact />
+  </main>
+
+  <!-- Editorial Quiet Footer -->
+  <app-footer />
+
+  <!-- Interactive Overlays -->
+  <app-lightbox />
+  <app-presentation-mode />
+  <app-quick-share-modal />
+  <app-cloud-export-modal />
+
+  <!-- Floating Offline Connectivity Banner -->
+  @if (!portfolio.isOnline()) {
+    <div
+      class="fixed bottom-6 left-6 z-40 flex items-center gap-2 px-3.5 py-2 rounded-xl bg-amber-500 text-zinc-950 text-xs font-semibold shadow-xl border border-amber-400"
+      role="status"
+    >
+      <span class="w-2 h-2 rounded-full bg-zinc-950 animate-pulse"></span>
+      <span>Offline Mode — Cached Portfolio Active</span>
+    </div>
+  }
+
+  <!-- Toast Notification System -->
+  @if (portfolio.toastMessage(); as msg) {
+    <div
+      class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-900 border border-white/20 text-white text-xs font-medium shadow-2xl backdrop-blur-md transition-all animate-bounce"
+      role="status"
+    >
+      <mat-icon class="text-amber-400 text-base leading-none">check_circle</mat-icon>
+      <span>{{ msg }}</span>
+    </div>
+  }
+
+</div>

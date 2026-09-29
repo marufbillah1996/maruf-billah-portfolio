@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <rect width="512" height="512" rx="128" fill="#090a0f"/>
+  <rect x="24" y="24" width="464" height="464" rx="104" stroke="rgba(255,255,255,0.08)" stroke-width="3"/>
+  <!-- Code Brackets & Layered Architecture Monogram -->
+  <path d="M 170 190 L 100 256 L 170 322" stroke="#10b981" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 342 190 L 412 256 L 342 322" stroke="#38bdf8" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- C# / .NET Core central slash & node -->
+  <line x1="280" y1="160" x2="232" y2="352" stroke="#f59e0b" stroke-width="24" stroke-linecap="round"/>
+  <circle cx="256" cy="256" r="18" fill="#ffffff"/>
+  <text x="256" y="430" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="28" fill="#ffffff" letter-spacing="4">MD. MARUF BILLAH</text>
+  <text x="256" y="460" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="14" fill="#10b981" letter-spacing="4">.NET SOFTWARE ENGINEER</text>
+</svg>

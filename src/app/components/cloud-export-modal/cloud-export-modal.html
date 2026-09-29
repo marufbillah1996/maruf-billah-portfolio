@@ -1,0 +1,126 @@
+@if (portfolio.dossierExportOpen()) {
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 transition-all"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Cloud Drive Technical Dossier Export"
+  >
+    <!-- Accessible Backdrop Click -->
+    <button type="button" class="absolute inset-0 bg-transparent w-full h-full border-0 cursor-default" aria-label="Close modal" (click)="close()"></button>
+
+    <div class="relative w-full max-w-2xl bg-zinc-900 border border-white/10 rounded-2xl shadow-2xl p-6 sm:p-8 z-10 space-y-6 text-white max-h-[90vh] overflow-y-auto">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-white/5 pb-4">
+        <div>
+          <span class="text-[11px] font-mono tracking-wider uppercase text-sky-400">Mobile & Cloud Drive Backup</span>
+          <h3 class="text-lg font-bold text-white">Export Technical Dossier & Projects</h3>
+        </div>
+        <button
+          type="button"
+          (click)="close()"
+          class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-white/5 transition-colors"
+          title="Close (ESC)"
+        >
+          <mat-icon class="text-lg leading-none">close</mat-icon>
+        </button>
+      </div>
+
+      <!-- Cloud Sync Protocol Description -->
+      <div class="p-4 rounded-xl bg-sky-950/30 border border-sky-500/20 text-xs text-sky-200 leading-relaxed font-light flex items-start gap-3">
+        <mat-icon class="text-sky-400 text-lg leading-none shrink-0 mt-0.5">cloud_sync</mat-icon>
+        <div>
+          <strong class="font-medium text-white block mb-0.5">Maintain consistent portfolio presence anywhere:</strong>
+          Exporting generates a structured technical manifest (JSON/CSV) plus digital contact card that you can store in Google Drive, OneDrive, or local phone memory. During client meetings and technical interviews, you can reference your architectures and verified project metrics with zero network dependency.
+        </div>
+      </div>
+
+      <!-- Primary Export Actions -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <!-- 1. JSON Dossier -->
+        <button
+          type="button"
+          (click)="exportJson()"
+          class="p-4 rounded-xl bg-zinc-950 border border-white/10 hover:border-sky-400/40 transition-all text-left group"
+        >
+          <div class="flex items-center justify-between mb-2">
+            <mat-icon class="text-sky-400 text-xl leading-none">data_object</mat-icon>
+            <span class="text-[10px] font-mono text-zinc-500">.JSON</span>
+          </div>
+          <div class="text-xs font-bold text-white group-hover:text-sky-300">Export Full Dossier</div>
+          <div class="text-[11px] text-zinc-400 font-light mt-0.5">Complete CV, architecture & skills</div>
+        </button>
+
+        <!-- 2. CSV Catalog -->
+        <button
+          type="button"
+          (click)="exportCsv()"
+          class="p-4 rounded-xl bg-zinc-950 border border-white/10 hover:border-emerald-400/40 transition-all text-left group"
+        >
+          <div class="flex items-center justify-between mb-2">
+            <mat-icon class="text-emerald-400 text-xl leading-none">table_chart</mat-icon>
+            <span class="text-[10px] font-mono text-zinc-500">.CSV</span>
+          </div>
+          <div class="text-xs font-bold text-white group-hover:text-emerald-300">Export Project Index</div>
+          <div class="text-[11px] text-zinc-400 font-light mt-0.5">Tabular systems & stack sheet</div>
+        </button>
+
+        <!-- 3. vCard Contact -->
+        <button
+          type="button"
+          (click)="downloadContactCard()"
+          class="p-4 rounded-xl bg-zinc-950 border border-white/10 hover:border-amber-400/40 transition-all text-left group"
+        >
+          <div class="flex items-center justify-between mb-2">
+            <mat-icon class="text-amber-400 text-xl leading-none">contact_phone</mat-icon>
+            <span class="text-[10px] font-mono text-zinc-500">.VCF</span>
+          </div>
+          <div class="text-xs font-bold text-white group-hover:text-amber-300">Save Contact vCard</div>
+          <div class="text-[11px] text-zinc-400 font-light mt-0.5">Add to phone address book</div>
+        </button>
+      </div>
+
+      <!-- Recommended Cloud Drive Folder Structure -->
+      <div class="p-4 rounded-xl bg-zinc-950 border border-white/5 space-y-2">
+        <div class="flex items-center justify-between text-xs font-mono">
+          <span class="text-zinc-400">Recommended Cloud Drive Folder Hierarchy:</span>
+          <span class="text-sky-400">/Maruf_Billah_Software_Engineering_Dossier/</span>
+        </div>
+        <div class="font-mono text-[11px] text-zinc-500 pl-2 border-l border-white/10 space-y-1">
+          <div>📁 01_Resume_And_Credentials/ (PDF Resume & IsDB Diploma)</div>
+          <div>📁 02_Architecture_Diagrams/ (VortiBd, EIMS ERP Layering)</div>
+          <div>📁 03_Enterprise_ERP_Case_Studies/ (SICS, RMS, HRM, FAMS, PMS, CRMS)</div>
+          <div>📁 04_Database_Schemas_And_SQL/ (Stored Procedures, Triggers, Views)</div>
+          <div>📁 05_Awards_And_Certifications/ (2025 Office Excellence Trophy)</div>
+          <div>📄 maruf_billah_engineer_dossier.json & contact.vcf</div>
+        </div>
+      </div>
+
+      <!-- Project List Preview -->
+      <div class="space-y-2">
+        <div class="text-xs font-mono text-zinc-400">Catalogued Systems Included in Export ({{ portfolio.projects().length }} Projects):</div>
+        <div class="max-h-40 overflow-y-auto space-y-1.5 pr-1">
+          @for (proj of portfolio.projects(); track proj.id) {
+            <div class="flex items-center justify-between p-2 rounded-lg bg-zinc-950 border border-white/5 text-xs">
+              <span class="text-zinc-200 font-medium">{{ proj.name }}</span>
+              <span class="text-[11px] font-mono text-emerald-400">{{ proj.metric }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Footer Action -->
+      <div class="pt-4 border-t border-white/5 flex items-center justify-between">
+        <span class="text-xs font-mono text-zinc-500">Sync ready for Google Drive & OneDrive</span>
+        <button
+          type="button"
+          (click)="close()"
+          class="px-4 py-2 text-xs font-semibold text-zinc-950 bg-emerald-400 hover:bg-emerald-300 rounded-xl transition-colors"
+        >
+          Done
+        </button>
+      </div>
+
+    </div>
+  </div>
+}

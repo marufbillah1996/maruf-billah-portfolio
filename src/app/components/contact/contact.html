@@ -1,0 +1,236 @@
+<section id="contact" class="py-12 sm:py-24 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+      
+      <!-- Left Column: Inquiry / Hiring Form -->
+      <div class="lg:col-span-7 space-y-6">
+        <div>
+          <div class="text-xs font-mono tracking-wider uppercase text-emerald-400 mb-2">Engineering Opportunities</div>
+          <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+            Initiate a Software Project or Consultation
+          </h2>
+          <p class="text-sm text-zinc-400 mt-2 font-light max-w-xl">
+            Available for Senior .NET Core & Angular Full-Stack roles, enterprise ERP module development, database query optimization, and technical consultations.
+          </p>
+        </div>
+
+        @if (submitted()) {
+          <div class="p-6 rounded-2xl border border-emerald-500/30 bg-emerald-950/20 text-emerald-200 space-y-3">
+            <div class="flex items-center gap-2 font-bold text-white text-base">
+              <mat-icon class="text-emerald-400">check_circle</mat-icon>
+              <span>Thank You — Inquiry Dispatched!</span>
+            </div>
+            <p class="text-xs leading-relaxed text-zinc-300 font-light">
+              Your inquiry has been formulated and directed to <strong class="text-white">{{ cv.email }}</strong>. Maruf will respond promptly.
+            </p>
+            <div class="flex items-center gap-3 pt-2">
+              <button
+                type="button"
+                (click)="resetForm()"
+                class="px-3.5 py-1.5 rounded-lg bg-zinc-800 text-xs font-medium text-white hover:bg-zinc-700 transition-colors"
+              >
+                Send Another Message
+              </button>
+              <a
+                [href]="'https://wa.me/8801684937787?text=Hello%20Maruf,%20following%20up%20on%20my%20software%20engineering%20inquiry...'"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-3.5 py-1.5 rounded-lg bg-emerald-600 text-xs font-semibold text-white hover:bg-emerald-500 transition-colors"
+              >
+                Follow Up via WhatsApp
+              </a>
+            </div>
+          </div>
+        } @else {
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Name -->
+              <div>
+                <label for="clientName" class="block text-xs font-mono text-zinc-400 mb-1">
+                  Your Full Name *
+                </label>
+                <input
+                  id="clientName"
+                  type="text"
+                  formControlName="clientName"
+                  placeholder="e.g. Engineering Lead / Recruiter"
+                  class="w-full bg-zinc-900 border border-white/10 text-white placeholder-zinc-600 text-xs rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-emerald-400 transition-colors"
+                />
+                @if (contactForm.controls.clientName.touched && contactForm.controls.clientName.invalid) {
+                  <span class="text-[11px] text-rose-400 mt-1 block">Full name is required.</span>
+                }
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label for="clientEmail" class="block text-xs font-mono text-zinc-400 mb-1">
+                  Email Address *
+                </label>
+                <input
+                  id="clientEmail"
+                  type="email"
+                  formControlName="clientEmail"
+                  placeholder="e.g. team@company.com"
+                  class="w-full bg-zinc-900 border border-white/10 text-white placeholder-zinc-600 text-xs rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-emerald-400 transition-colors"
+                />
+                @if (contactForm.controls.clientEmail.touched && contactForm.controls.clientEmail.invalid) {
+                  <span class="text-[11px] text-rose-400 mt-1 block">Valid work email is required.</span>
+                }
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <!-- Phone -->
+              <div>
+                <label for="clientPhone" class="block text-xs font-mono text-zinc-400 mb-1">
+                  Phone / WhatsApp
+                </label>
+                <input
+                  id="clientPhone"
+                  type="tel"
+                  formControlName="clientPhone"
+                  placeholder="+880..."
+                  class="w-full bg-zinc-900 border border-white/10 text-white placeholder-zinc-600 text-xs rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-emerald-400 transition-colors"
+                />
+              </div>
+
+              <!-- Opportunity Type -->
+              <div>
+                <label for="projectType" class="block text-xs font-mono text-zinc-400 mb-1">
+                  Engagement Scope
+                </label>
+                <select
+                  id="projectType"
+                  formControlName="projectType"
+                  class="w-full bg-zinc-900 border border-white/10 text-white text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:border-emerald-400 transition-colors"
+                >
+                  <option value="enterprise-erp">Enterprise ERP Development</option>
+                  <option value="backend-api">.NET Core Web API Architecture</option>
+                  <option value="fullstack-angular">Angular SPA Frontend Modernization</option>
+                  <option value="database-tuning">SQL Server Schema & Stored Procedures</option>
+                  <option value="fulltime-hire">Full-Time Software Engineer Role</option>
+                </select>
+              </div>
+
+              <!-- Location -->
+              <div>
+                <label for="location" class="block text-xs font-mono text-zinc-400 mb-1">
+                  Work Location
+                </label>
+                <select
+                  id="location"
+                  formControlName="location"
+                  class="w-full bg-zinc-900 border border-white/10 text-white text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:border-emerald-400 transition-colors"
+                >
+                  <option value="Dhaka">Dhaka (Mirpur, Gulshan, Banani, etc.)</option>
+                  <option value="Gazipur">Gazipur / Konabari</option>
+                  <option value="Remote">Remote (Global or National)</option>
+                  <option value="Hybrid">Hybrid Model</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Brief -->
+            <div>
+              <label for="brief" class="block text-xs font-mono text-zinc-400 mb-1">
+                Project Scope / Role Requirements *
+              </label>
+              <textarea
+                id="brief"
+                rows="4"
+                formControlName="brief"
+                placeholder="Outline your application tech stack, timeline, or job description details..."
+                class="w-full bg-zinc-900 border border-white/10 text-white placeholder-zinc-600 text-xs rounded-xl p-3.5 focus:outline-none focus:border-emerald-400 transition-colors resize-none"
+              ></textarea>
+              @if (contactForm.controls.brief.touched && contactForm.controls.brief.invalid) {
+                <span class="text-[11px] text-rose-400 mt-1 block">Please provide at least 10 characters describing the opportunity.</span>
+              }
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="w-full sm:w-auto px-6 py-3 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-zinc-950 font-semibold text-xs flex items-center justify-center gap-2 shadow-sm transition-colors"
+            >
+              <mat-icon class="text-base leading-none">send</mat-icon>
+              <span>Transmit Engineering Note</span>
+            </button>
+          </form>
+        }
+      </div>
+
+      <!-- Right Column: Direct Contact & Client Meeting Sheet -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="p-6 rounded-2xl border border-white/10 bg-zinc-900/80 space-y-6">
+          <div>
+            <span class="text-[11px] font-mono tracking-wider uppercase text-emerald-400">Networking Contact Card</span>
+            <h3 class="text-xl font-bold text-white mt-1">Md. Maruf Billah</h3>
+            <p class="text-xs text-zinc-400 mt-1 font-light">
+              .NET Software Engineer & Full-Stack Developer
+            </p>
+          </div>
+
+          <div class="space-y-4 text-xs font-mono border-y border-white/5 py-4">
+            <div class="flex items-center gap-3">
+              <mat-icon class="text-emerald-400 text-lg leading-none">phone</mat-icon>
+              <div>
+                <span class="text-zinc-500 block text-[10px]">Direct Mobile / WhatsApp</span>
+                <a [href]="'tel:' + cv.phone" class="text-white hover:text-emerald-400 font-bold transition-colors">{{ cv.phone }}</a>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <mat-icon class="text-emerald-400 text-lg leading-none">email</mat-icon>
+              <div>
+                <span class="text-zinc-500 block text-[10px]">Email Dispatch</span>
+                <a [href]="'mailto:' + cv.email" class="text-white hover:text-emerald-400 transition-colors">{{ cv.email }}</a>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <mat-icon class="text-emerald-400 text-lg leading-none">home_pin</mat-icon>
+              <div>
+                <span class="text-zinc-500 block text-[10px]">Location</span>
+                <span class="text-zinc-300 font-sans text-xs">{{ cv.location }}</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <mat-icon class="text-sky-400 text-lg leading-none">public</mat-icon>
+              <div>
+                <span class="text-zinc-500 block text-[10px]">LinkedIn Professional</span>
+                <a [href]="cv.linkedin" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline">
+                  linkedin.com/in/maruf-billah-543aa8162
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Networking Actions -->
+          <div class="space-y-2.5">
+            <button
+              type="button"
+              (click)="portfolio.downloadVCard()"
+              class="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium text-xs flex items-center justify-center gap-2 transition-colors"
+            >
+              <mat-icon class="text-base leading-none text-emerald-400">download</mat-icon>
+              <span>Download Contact (.vcf)</span>
+            </button>
+
+            <button
+              type="button"
+              (click)="portfolio.openQuickShare()"
+              class="w-full py-2.5 px-4 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-zinc-950 font-semibold text-xs flex items-center justify-center gap-2 transition-colors"
+            >
+              <mat-icon class="text-base leading-none">qr_code_2</mat-icon>
+              <span>Show QR Code for Quick Scan</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

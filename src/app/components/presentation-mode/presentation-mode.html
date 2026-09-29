@@ -1,0 +1,147 @@
+@if (portfolio.pitchMode()) {
+  <div
+    class="fixed inset-0 z-50 bg-[#050507] text-white flex flex-col justify-between p-4 sm:p-8 select-none"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Software Engineering Pitch Presentation"
+  >
+    <!-- Top HUD: Minimalist Branding & Slide Counter -->
+    <div class="flex items-center justify-between text-xs font-mono text-zinc-400 z-20">
+      <div class="flex items-center gap-3">
+        <span class="text-white font-bold text-sm tracking-wide">Md. Maruf Billah</span>
+        <span class="text-zinc-600">·</span>
+        <span class="text-emerald-400">Technical Interview & Client Pitch Deck</span>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <!-- Slide Count -->
+        <span class="text-zinc-300 font-bold tabular-nums">
+          {{ (portfolio.currentSlideIndex() + 1).toString().padStart(2, '0') }} / {{ portfolio.filteredProjects().length.toString().padStart(2, '0') }}
+        </span>
+
+        <!-- Exit Presentation -->
+        <button
+          type="button"
+          (click)="portfolio.exitPitchMode()"
+          class="p-2 bg-white/10 hover:bg-white/20 rounded-xl transition-colors flex items-center gap-1.5 text-xs text-white"
+          title="Exit pitch mode (ESC)"
+        >
+          <mat-icon class="text-base leading-none">close</mat-icon>
+          <span class="hidden sm:inline">Exit Pitch</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Central Slide Display -->
+    @if (currentSlide(); as project) {
+      <div class="flex-1 flex flex-col items-center justify-center relative my-4 overflow-y-auto px-2 max-w-4xl mx-auto w-full">
+        
+        <div class="w-full bg-zinc-900/80 border border-white/10 rounded-2xl p-6 sm:p-10 space-y-6 shadow-2xl">
+          
+          <div class="flex items-center justify-between border-b border-white/5 pb-4">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+              <span class="text-xs font-mono uppercase tracking-wider text-emerald-400">
+                {{ project.categoryLabel }}
+              </span>
+            </div>
+            <span class="font-mono text-xs px-3 py-1 rounded bg-zinc-950 border border-white/10 text-white font-bold tabular-nums">
+              {{ project.metric }} · {{ project.metricLabel }}
+            </span>
+          </div>
+
+          <div>
+            <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+              {{ project.name }}
+            </h2>
+            <div class="text-xs font-mono text-zinc-400 mt-1">
+              {{ project.companyOrContext }} · Role: <strong class="text-white">{{ project.role }}</strong>
+            </div>
+          </div>
+
+          <p class="text-sm sm:text-base text-zinc-300 font-light leading-relaxed">
+            {{ project.fullDescription }}
+          </p>
+
+          <!-- Core Architecture Breakdown in Pitch Mode -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono pt-2">
+            <div class="p-3.5 rounded-xl bg-zinc-950 border border-white/5">
+              <span class="text-[10px] text-sky-400 uppercase tracking-wider font-bold block mb-1">Presentation Layer</span>
+              <span class="text-zinc-300 font-sans text-xs">{{ project.architectureDetails.clientLayer }}</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-zinc-950 border border-white/5">
+              <span class="text-[10px] text-emerald-400 uppercase tracking-wider font-bold block mb-1">API & Service Layer</span>
+              <span class="text-zinc-300 font-sans text-xs">{{ project.architectureDetails.businessLogicLayer }}</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-zinc-950 border border-white/5">
+              <span class="text-[10px] text-amber-400 uppercase tracking-wider font-bold block mb-1">Database & Storage</span>
+              <span class="text-zinc-300 font-sans text-xs">{{ project.architectureDetails.database }}</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-zinc-950 border border-white/5">
+              <span class="text-[10px] text-emerald-400 uppercase tracking-wider font-bold block mb-1">Performance Metric</span>
+              <span class="text-zinc-300 font-sans text-xs">{{ project.architectureDetails.performanceNotes }}</span>
+            </div>
+          </div>
+
+          <!-- Technologies Ribbon -->
+          <div class="pt-4 border-t border-white/5 flex items-center flex-wrap gap-2 text-xs font-mono text-zinc-400">
+            <span class="text-zinc-500 font-sans">Stack:</span>
+            @for (tech of project.technologies; track tech; let last = $last) {
+              <span class="text-zinc-200">{{ tech }}</span>
+              @if (!last) {
+                <span aria-hidden="true" class="text-zinc-700">·</span>
+              }
+            }
+          </div>
+
+        </div>
+
+        <!-- Left / Right Touch / Click Zones -->
+        <button
+          type="button"
+          (click)="portfolio.prevSlide()"
+          class="absolute left-0 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 hover:bg-black/90 border border-white/10 flex items-center justify-center text-white transition-transform hover:scale-105"
+          title="Previous slide"
+        >
+          <mat-icon class="text-2xl leading-none">chevron_left</mat-icon>
+        </button>
+
+        <button
+          type="button"
+          (click)="portfolio.nextSlide()"
+          class="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 hover:bg-black/90 border border-white/10 flex items-center justify-center text-white transition-transform hover:scale-105"
+          title="Next slide"
+        >
+          <mat-icon class="text-2xl leading-none">chevron_right</mat-icon>
+        </button>
+      </div>
+
+      <!-- Bottom Floating Presenter Bar -->
+      <div class="max-w-4xl mx-auto w-full p-4 rounded-2xl bg-zinc-900/90 border border-white/10 backdrop-blur-md flex items-center justify-between gap-4 z-20">
+        <div class="flex items-center gap-2 text-xs font-mono text-zinc-400">
+          <span class="text-white font-bold">{{ project.name }}</span>
+          <span class="text-zinc-600">·</span>
+          <span class="text-emerald-400">{{ project.companyOrContext }}</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            (click)="portfolio.prevSlide()"
+            class="px-3 py-2 bg-zinc-800 hover:bg-zinc-700 rounded-xl text-xs font-medium text-white transition-colors"
+          >
+            Previous
+          </button>
+          <button
+            type="button"
+            (click)="portfolio.nextSlide()"
+            class="px-4 py-2 bg-emerald-400 hover:bg-emerald-300 text-zinc-950 rounded-xl font-semibold text-xs flex items-center gap-1.5 transition-colors"
+          >
+            <span>Next Project</span>
+            <mat-icon class="text-sm leading-none">arrow_forward</mat-icon>
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+}

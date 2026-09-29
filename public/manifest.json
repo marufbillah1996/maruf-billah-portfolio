@@ -1,0 +1,20 @@
+{
+  "id": "/",
+  "name": "Md. Maruf Billah | .NET Software Engineer Portfolio",
+  "short_name": "MarufBillah",
+  "description": "Professional full-stack software engineer portfolio of Md. Maruf Billah featuring enterprise ERP, .NET Core APIs, and Angular architecture",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#090a0f",
+  "theme_color": "#090a0f",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

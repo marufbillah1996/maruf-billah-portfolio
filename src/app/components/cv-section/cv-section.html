@@ -1,0 +1,256 @@
+<section id="experience" class="py-12 sm:py-24 border-t border-white/5 bg-zinc-950">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Top Editorial Header & Dossier Actions -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div>
+        <div class="text-xs font-mono tracking-wider uppercase text-emerald-400 mb-2">Verified Professional History</div>
+        <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+          Work Experience & Technical Dossier
+        </h2>
+        <p class="text-sm text-zinc-400 mt-2 max-w-2xl font-light">
+          Comprehensive curriculum vitae of Md. Maruf Billah. 5 years of full-stack engineering, enterprise ERP systems, and API development based on verified credentials.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button
+          type="button"
+          (click)="portfolio.downloadVCard()"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-zinc-950 bg-emerald-400 hover:bg-emerald-300 rounded-xl transition-colors whitespace-nowrap"
+        >
+          <mat-icon class="text-base leading-none">contact_phone</mat-icon>
+          <span>Save Contact Card</span>
+        </button>
+        <button
+          type="button"
+          (click)="printResume()"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-medium text-white bg-zinc-800 hover:bg-zinc-700 border border-white/10 rounded-xl transition-colors whitespace-nowrap"
+        >
+          <mat-icon class="text-base leading-none">print</mat-icon>
+          <span>Print / Save PDF</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Official 2025 Office Excellence Award Banner -->
+    <div class="mb-12 p-6 rounded-2xl border border-emerald-500/30 bg-gradient-to-r from-emerald-500/10 via-zinc-900 to-zinc-900 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 rounded-xl bg-emerald-400/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-400/30">
+          <mat-icon class="text-2xl leading-none">military_tech</mat-icon>
+        </div>
+        <div>
+          <div class="text-xs font-mono tracking-wider uppercase text-emerald-400">{{ cv.award.organization }} · {{ cv.award.year }}</div>
+          <h3 class="text-lg font-bold text-white mt-1">{{ cv.award.title }}</h3>
+          <p class="text-xs text-zinc-300 mt-1 max-w-2xl font-light leading-relaxed">
+            {{ cv.award.details }}
+          </p>
+        </div>
+      </div>
+      <div class="text-right shrink-0">
+        <div class="text-xs font-mono text-zinc-400">Awarded</div>
+        <div class="text-2xl font-mono font-bold text-emerald-400 tabular-nums">01 / 2025</div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+      
+      <!-- Left Column: Work Experience Timeline -->
+      <div class="lg:col-span-8 space-y-10">
+        <div>
+          <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+            <mat-icon class="text-emerald-400 text-lg leading-none">business_center</mat-icon>
+            <span>Professional Work Experience</span>
+          </h3>
+
+          <div class="space-y-8 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-white/10">
+            @for (exp of cv.experiences; track exp.company) {
+              <div class="relative pl-10">
+                <!-- Node marker -->
+                <div class="absolute left-2 top-1.5 w-3 h-3 rounded-full bg-emerald-400 border-4 border-[#090a0f] ring-2 ring-emerald-400/30"></div>
+
+                <div class="p-6 rounded-2xl border border-white/10 bg-zinc-900/60 hover:bg-zinc-900 transition-colors space-y-3">
+                  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                    <h4 class="text-base font-bold text-white">{{ exp.role }}</h4>
+                    <span class="text-xs font-mono text-emerald-400 tabular-nums font-semibold">{{ exp.period }}</span>
+                  </div>
+
+                  <div class="text-xs font-mono text-zinc-400">
+                    {{ exp.company }} · {{ exp.location }} (Dept: {{ exp.department }})
+                  </div>
+
+                  @if (exp.achievements) {
+                    <div class="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-mono flex items-center gap-2">
+                      <mat-icon class="text-sm leading-none">stars</mat-icon>
+                      <span>{{ exp.achievements }}</span>
+                    </div>
+                  }
+
+                  <!-- Bullet highlights from CV -->
+                  <ul class="space-y-2 text-xs text-zinc-300 leading-relaxed font-light list-disc pl-4">
+                    @for (item of exp.highlights; track item) {
+                      <li>{{ item }}</li>
+                    }
+                  </ul>
+
+                  <!-- Tech stack tags rendered cleanly without candy pills -->
+                  <div class="pt-3 border-t border-white/5 flex items-center flex-wrap gap-1.5 text-[11px] font-mono text-zinc-400">
+                    <span class="text-zinc-600 font-sans">Technologies:</span>
+                    @for (tech of exp.technologies; track tech; let last = $last) {
+                      <span class="text-zinc-300">{{ tech }}</span>
+                      @if (!last) {
+                        <span aria-hidden="true" class="text-zinc-700">·</span>
+                      }
+                    }
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Technical Skills Matrix Section (#skills) -->
+        <div id="skills" class="pt-6">
+          <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+            <mat-icon class="text-emerald-400 text-lg leading-none">terminal</mat-icon>
+            <span>Technical Skills & Competency Matrix</span>
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            @for (group of cv.skillGroups; track group.category) {
+              <div class="p-5 rounded-2xl border border-white/10 bg-zinc-900/60 space-y-4">
+                <div class="flex items-center justify-between text-xs font-mono text-emerald-400 border-b border-white/5 pb-2">
+                  <span class="font-bold uppercase tracking-wider">{{ group.category }}</span>
+                  <span class="text-zinc-500">{{ group.skills.length }} Skills</span>
+                </div>
+
+                <div class="space-y-3">
+                  @for (skill of group.skills; track skill.name) {
+                    <div class="space-y-1">
+                      <div class="flex items-center justify-between text-xs">
+                        <span class="text-white font-medium">{{ skill.name }}</span>
+                        <span class="text-[11px] font-mono text-zinc-400 tabular-nums">{{ skill.level }}%</span>
+                      </div>
+                      <div class="w-full h-1.5 bg-zinc-950 rounded-full overflow-hidden border border-white/5">
+                        <div class="h-full bg-emerald-400 rounded-full" [style.width.%]="skill.level"></div>
+                      </div>
+                      <p class="text-[10px] text-zinc-500 font-mono font-light">
+                        {{ skill.note }}
+                      </p>
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Direct Contact Sheet, IsDB Certification & Education -->
+      <div class="lg:col-span-4 space-y-8">
+        
+        <!-- Contact Sheet Card -->
+        <div id="cv-story" class="p-5 rounded-2xl border border-white/10 bg-zinc-900/90 space-y-4">
+          <div class="text-xs font-mono tracking-wider uppercase text-emerald-400">Direct Contact Details</div>
+          
+          <div class="space-y-3.5 text-xs">
+            <div class="flex items-start gap-3">
+              <mat-icon class="text-emerald-400 text-base leading-none mt-0.5">location_on</mat-icon>
+              <div>
+                <div class="text-zinc-500 font-mono text-[10px]">Location</div>
+                <div class="text-white font-medium">{{ cv.location }}</div>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <mat-icon class="text-emerald-400 text-base leading-none mt-0.5">phone</mat-icon>
+              <div>
+                <div class="text-zinc-500 font-mono text-[10px]">Direct Mobile / WhatsApp</div>
+                <a [href]="'tel:' + cv.phone" class="text-white hover:text-emerald-400 font-mono font-bold">{{ cv.phone }}</a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <mat-icon class="text-emerald-400 text-base leading-none mt-0.5">email</mat-icon>
+              <div>
+                <div class="text-zinc-500 font-mono text-[10px]">Direct Email</div>
+                <a [href]="'mailto:' + cv.email" class="text-white hover:text-emerald-400 font-mono">{{ cv.email }}</a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <mat-icon class="text-sky-400 text-base leading-none mt-0.5">public</mat-icon>
+              <div>
+                <div class="text-zinc-500 font-mono text-[10px]">LinkedIn Professional</div>
+                <a [href]="cv.linkedin" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline font-mono truncate block max-w-[200px]">
+                  linkedin.com/in/maruf-billah...
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2 space-y-2">
+            <button
+              type="button"
+              (click)="portfolio.openQuickShare()"
+              class="w-full py-2.5 px-3 rounded-xl bg-emerald-400 text-zinc-950 font-semibold text-xs text-center flex items-center justify-center gap-1.5 shadow-sm hover:bg-emerald-300 transition-colors"
+            >
+              <mat-icon class="text-base leading-none">qr_code_2</mat-icon>
+              <span>Instant QR Networking Code</span>
+            </button>
+            <button
+              type="button"
+              (click)="portfolio.downloadVCard()"
+              class="w-full py-2 px-3 rounded-xl bg-zinc-800 text-zinc-200 font-medium text-xs text-center flex items-center justify-center gap-1.5 hover:bg-zinc-700 transition-colors"
+            >
+              <mat-icon class="text-sm leading-none">download</mat-icon>
+              <span>Download Phone Contact (.vcf)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- IsDB-BISEW Certification -->
+        <div class="p-5 rounded-2xl border border-white/10 bg-zinc-900/60 space-y-3">
+          <div class="text-xs font-mono tracking-wider uppercase text-emerald-400">Enterprise Certification</div>
+          <h4 class="text-sm font-bold text-white">{{ cv.certification.title }}</h4>
+          <div class="text-xs text-zinc-400 font-mono">
+            {{ cv.certification.authority }}
+          </div>
+          <div class="text-xs text-zinc-500 font-mono tabular-nums">
+            {{ cv.certification.period }}
+          </div>
+          <p class="text-xs text-zinc-400 font-light leading-relaxed border-t border-white/5 pt-2">
+            {{ cv.certification.description }}
+          </p>
+        </div>
+
+        <!-- Academic Background -->
+        <div class="p-5 rounded-2xl border border-white/10 bg-zinc-900/60 space-y-4">
+          <div class="text-xs font-mono tracking-wider uppercase text-emerald-400">Academic Background</div>
+          
+          <div class="space-y-4">
+            @for (edu of cv.education; track edu.degree) {
+              <div class="space-y-1 pb-3 border-b border-white/5 last:border-0 last:pb-0">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="font-bold text-white">{{ edu.degree }}</span>
+                  <span class="font-mono text-zinc-400 tabular-nums">{{ edu.year }}</span>
+                </div>
+                <div class="text-xs text-zinc-400">{{ edu.institution }}</div>
+                <div class="text-[11px] font-mono text-emerald-400 font-semibold">{{ edu.grade }}</div>
+                @if (edu.note) {
+                  <p class="text-[11px] text-zinc-500 font-light mt-1">
+                    {{ edu.note }}
+                  </p>
+                }
+              </div>
+            }
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>

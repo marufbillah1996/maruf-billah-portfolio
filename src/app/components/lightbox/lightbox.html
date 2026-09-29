@@ -1,0 +1,168 @@
+@if (portfolio.activeProject(); as project) {
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl p-4 sm:p-6 transition-all"
+    role="dialog"
+    aria-modal="true"
+    aria-label="System Architecture Inspector"
+  >
+    <!-- Accessible Backdrop Click -->
+    <button type="button" class="absolute inset-0 bg-transparent w-full h-full border-0 cursor-default" aria-label="Close modal" (click)="close()"></button>
+
+    <!-- Modal Content Container -->
+    <div class="relative w-full max-w-4xl max-h-[90vh] bg-zinc-900 border border-white/10 rounded-2xl shadow-2xl p-6 sm:p-8 z-10 space-y-6 text-white overflow-y-auto">
+      
+      <!-- Top Action Ribbon -->
+      <div class="flex items-center justify-between border-b border-white/5 pb-4">
+        <div class="flex items-center gap-3">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+          <span class="text-xs font-mono tracking-wider uppercase text-emerald-400">
+            {{ project.categoryLabel }}
+          </span>
+          <span class="text-zinc-600">·</span>
+          <span class="text-xs font-mono text-zinc-400">
+            {{ project.companyOrContext }} ({{ project.period }})
+          </span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            (click)="prevProject()"
+            class="p-2 text-zinc-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-xl transition-colors"
+            title="Previous project (Left arrow)"
+          >
+            <mat-icon class="text-base leading-none">chevron_left</mat-icon>
+          </button>
+          <button
+            type="button"
+            (click)="nextProject()"
+            class="p-2 text-zinc-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-xl transition-colors"
+            title="Next project (Right arrow)"
+          >
+            <mat-icon class="text-base leading-none">chevron_right</mat-icon>
+          </button>
+          <button
+            type="button"
+            (click)="close()"
+            class="p-2 text-zinc-400 hover:text-white bg-white/10 hover:bg-white/20 rounded-xl transition-colors focus-visible:ring-2 focus-visible:ring-emerald-400"
+            title="Close inspector (ESC)"
+          >
+            <mat-icon class="text-base leading-none">close</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- Title & Metric Block -->
+      <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
+            {{ project.name }}
+          </h2>
+          <div class="text-xs font-mono text-zinc-400 mt-1">
+            Role: <strong class="text-zinc-200">{{ project.role }}</strong>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-xl bg-zinc-950 border border-white/10 text-right shrink-0">
+          <div class="text-[10px] font-mono text-zinc-500 uppercase">{{ project.metricLabel }}</div>
+          <div class="text-lg font-mono font-bold text-emerald-400 tabular-nums">{{ project.metric }}</div>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed font-light">
+        {{ project.fullDescription }}
+      </p>
+
+      <!-- Multi-Tier System Architecture Blueprint -->
+      <div class="space-y-3 pt-2">
+        <div class="text-xs font-mono uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+          <mat-icon class="text-sm leading-none">schema</mat-icon>
+          <span>Multi-Tier Architecture Blueprint</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-mono">
+          <!-- Layer 1: Client Tier -->
+          <div class="p-3.5 rounded-xl bg-zinc-950 border border-white/5 space-y-1">
+            <span class="text-[10px] uppercase text-sky-400 tracking-wider font-bold">1. Client / Presentation Layer</span>
+            <p class="text-zinc-300 font-sans text-xs font-light">{{ project.architectureDetails.clientLayer }}</p>
+          </div>
+
+          <!-- Layer 2: Business Logic Tier -->
+          <div class="p-3.5 rounded-xl bg-zinc-950 border border-white/5 space-y-1">
+            <span class="text-[10px] uppercase text-emerald-400 tracking-wider font-bold">2. Business Logic & API Layer</span>
+            <p class="text-zinc-300 font-sans text-xs font-light">{{ project.architectureDetails.businessLogicLayer }}</p>
+          </div>
+
+          <!-- Layer 3: Data Access Tier -->
+          <div class="p-3.5 rounded-xl bg-zinc-950 border border-white/5 space-y-1">
+            <span class="text-[10px] uppercase text-amber-400 tracking-wider font-bold">3. Data Access & ORM Tier</span>
+            <p class="text-zinc-300 font-sans text-xs font-light">{{ project.architectureDetails.dataLayer }}</p>
+          </div>
+
+          <!-- Layer 4: Database Tier -->
+          <div class="p-3.5 rounded-xl bg-zinc-950 border border-white/5 space-y-1">
+            <span class="text-[10px] uppercase text-indigo-400 tracking-wider font-bold">4. Relational Database Tier</span>
+            <p class="text-zinc-300 font-sans text-xs font-light">{{ project.architectureDetails.database }}</p>
+          </div>
+
+          <!-- Layer 5: Security & Auth -->
+          <div class="p-3.5 rounded-xl bg-zinc-950 border border-white/5 space-y-1">
+            <span class="text-[10px] uppercase text-rose-400 tracking-wider font-bold">5. Security, Auth & RBAC</span>
+            <p class="text-zinc-300 font-sans text-xs font-light">{{ project.architectureDetails.securityAndAuth }}</p>
+          </div>
+
+          <!-- Layer 6: Performance & SLA -->
+          <div class="p-3.5 rounded-xl bg-zinc-950 border border-white/5 space-y-1">
+            <span class="text-[10px] uppercase text-emerald-400 tracking-wider font-bold">6. Performance & SLA Benchmark</span>
+            <p class="text-zinc-300 font-sans text-xs font-light">{{ project.architectureDetails.performanceNotes }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Engineering Highlights -->
+      <div class="space-y-2 pt-2 border-t border-white/5">
+        <div class="text-xs font-mono uppercase tracking-wider text-zinc-400">Implementation Highlights</div>
+        <ul class="space-y-1.5 text-xs text-zinc-300 list-disc pl-4 font-light">
+          @for (hl of project.keyHighlights; track hl) {
+            <li>{{ hl }}</li>
+          }
+        </ul>
+      </div>
+
+      <!-- Technologies Used -->
+      <div class="pt-2 border-t border-white/5">
+        <div class="text-[10px] font-mono uppercase text-zinc-500 mb-2">Technology Stack</div>
+        <div class="flex items-center flex-wrap gap-1.5 text-xs font-mono text-zinc-400">
+          @for (tech of project.technologies; track tech; let last = $last) {
+            <span class="text-zinc-200">{{ tech }}</span>
+            @if (!last) {
+              <span aria-hidden="true" class="text-zinc-700">·</span>
+            }
+          }
+        </div>
+      </div>
+
+      <!-- Action Footer -->
+      <div class="pt-4 border-t border-white/5 flex items-center justify-between">
+        <button
+          type="button"
+          (click)="launchPitchFromCurrent()"
+          class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:underline font-mono"
+        >
+          <mat-icon class="text-sm leading-none">slideshow</mat-icon>
+          <span>Present in Technical Pitch Mode</span>
+        </button>
+
+        <button
+          type="button"
+          (click)="close()"
+          class="px-4 py-2 text-xs font-semibold text-zinc-950 bg-emerald-400 hover:bg-emerald-300 rounded-xl transition-colors"
+        >
+          Done
+        </button>
+      </div>
+
+    </div>
+  </div>
+}

@@ -1,0 +1,168 @@
+@if (portfolio.quickShareOpen()) {
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 transition-all"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Quick networking and developer contact sharing"
+  >
+    <!-- Accessible Backdrop Click -->
+    <button type="button" class="absolute inset-0 bg-transparent w-full h-full border-0 cursor-default" aria-label="Close modal" (click)="close()"></button>
+
+    <!-- Modal Window -->
+    <div class="relative w-full max-w-md bg-zinc-900 border border-white/10 rounded-2xl shadow-2xl p-6 z-10 space-y-6 text-white max-h-[90vh] overflow-y-auto">
+      
+      <!-- Header -->
+      <div class="flex items-center justify-between border-b border-white/5 pb-4">
+        <div>
+          <span class="text-[11px] font-mono tracking-wider uppercase text-emerald-400">Networking & Client Share</span>
+          <h3 class="text-lg font-bold text-white">Developer Business Card</h3>
+        </div>
+        <button
+          type="button"
+          (click)="close()"
+          class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-white/5 transition-colors"
+          title="Close (ESC)"
+        >
+          <mat-icon class="text-lg leading-none">close</mat-icon>
+        </button>
+      </div>
+
+      <!-- Identity Card Preview -->
+      <div class="p-4 rounded-xl bg-zinc-950 border border-white/5 space-y-2">
+        <div class="flex items-center justify-between">
+          <h4 class="text-base font-bold text-white">{{ cv.name }}</h4>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-400/10 text-emerald-400 border border-emerald-400/20 font-bold">
+            VortiBd Award 2025
+          </span>
+        </div>
+        <p class="text-xs text-zinc-400 font-light">
+          {{ cv.title }} · Desh Universal Pvt. Ltd
+        </p>
+        <div class="text-[11px] font-mono text-zinc-500 pt-1">
+          {{ cv.location }}
+        </div>
+      </div>
+
+      <!-- High-Contrast Vector QR Code (for scanning directly with another smartphone) -->
+      <div class="flex flex-col items-center justify-center p-4 rounded-xl bg-white text-zinc-900 space-y-3">
+        <!-- SVG QR Pattern -->
+        <svg viewBox="0 0 200 200" width="160" height="160" class="w-40 h-40">
+          <rect width="200" height="200" fill="#ffffff"/>
+          <!-- Corner Position Markers -->
+          <rect x="20" y="20" width="46" height="46" rx="6" fill="#090a0f"/>
+          <rect x="28" y="28" width="30" height="30" rx="3" fill="#ffffff"/>
+          <rect x="35" y="35" width="16" height="16" rx="2" fill="#059669"/>
+
+          <rect x="134" y="20" width="46" height="46" rx="6" fill="#090a0f"/>
+          <rect x="142" y="28" width="30" height="30" rx="3" fill="#ffffff"/>
+          <rect x="149" y="35" width="16" height="16" rx="2" fill="#059669"/>
+
+          <rect x="20" y="134" width="46" height="46" rx="6" fill="#090a0f"/>
+          <rect x="28" y="142" width="30" height="30" rx="3" fill="#ffffff"/>
+          <rect x="35" y="149" width="16" height="16" rx="2" fill="#059669"/>
+
+          <!-- Stylized Data Grid Dots -->
+          <g fill="#090a0f">
+            <rect x="76" y="24" width="8" height="8"/>
+            <rect x="94" y="24" width="8" height="8"/>
+            <rect x="112" y="24" width="8" height="8"/>
+            <rect x="85" y="36" width="8" height="8"/>
+            <rect x="103" y="36" width="8" height="8"/>
+            
+            <rect x="76" y="54" width="8" height="8"/>
+            <rect x="94" y="54" width="8" height="8"/>
+            <rect x="112" y="54" width="8" height="8"/>
+            
+            <rect x="24" y="76" width="8" height="8"/>
+            <rect x="42" y="76" width="8" height="8"/>
+            <rect x="60" y="76" width="8" height="8"/>
+            <rect x="78" y="76" width="8" height="8"/>
+            <rect x="96" y="76" width="8" height="8"/>
+            <rect x="114" y="76" width="8" height="8"/>
+            <rect x="132" y="76" width="8" height="8"/>
+            <rect x="150" y="76" width="8" height="8"/>
+            <rect x="168" y="76" width="8" height="8"/>
+
+            <rect x="33" y="94" width="8" height="8"/>
+            <rect x="51" y="94" width="8" height="8"/>
+            <rect x="87" y="94" width="8" height="8"/>
+            <rect x="105" y="94" width="8" height="8"/>
+            <rect x="141" y="94" width="8" height="8"/>
+            <rect x="159" y="94" width="8" height="8"/>
+
+            <rect x="76" y="112" width="8" height="8"/>
+            <rect x="94" y="112" width="8" height="8"/>
+            <rect x="112" y="112" width="8" height="8"/>
+            <rect x="130" y="112" width="8" height="8"/>
+
+            <rect x="76" y="130" width="8" height="8"/>
+            <rect x="94" y="130" width="8" height="8"/>
+            <rect x="112" y="130" width="8" height="8"/>
+            <rect x="148" y="130" width="8" height="8"/>
+            <rect x="166" y="130" width="8" height="8"/>
+
+            <rect x="76" y="148" width="8" height="8"/>
+            <rect x="103" y="148" width="8" height="8"/>
+            <rect x="130" y="148" width="8" height="8"/>
+            <rect x="157" y="148" width="8" height="8"/>
+
+            <rect x="85" y="166" width="8" height="8"/>
+            <rect x="112" y="166" width="8" height="8"/>
+            <rect x="139" y="166" width="8" height="8"/>
+            <rect x="166" y="166" width="8" height="8"/>
+          </g>
+        </svg>
+
+        <p class="text-[11px] font-mono text-zinc-600 text-center font-medium">
+          Scan with phone camera to open developer portfolio & contact instantly
+        </p>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="space-y-2.5">
+        <!-- vCard Download -->
+        <button
+          type="button"
+          (click)="saveVCard()"
+          class="w-full py-2.5 px-4 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-zinc-950 font-semibold text-xs flex items-center justify-center gap-2 transition-colors shadow-sm"
+        >
+          <mat-icon class="text-base leading-none">contact_phone</mat-icon>
+          <span>Save Contact (.vcf) to Phone</span>
+        </button>
+
+        <div class="grid grid-cols-2 gap-2">
+          <!-- WhatsApp Direct -->
+          <a
+            [href]="'https://wa.me/8801684937787?text=Hello%20Maruf,%20I%20reviewed%20your%20software%20engineering%20portfolio...'"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="py-2 px-3 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/30 text-emerald-300 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors"
+          >
+            <mat-icon class="text-base leading-none">chat</mat-icon>
+            <span>WhatsApp</span>
+          </a>
+
+          <!-- Direct Call -->
+          <a
+            [href]="'tel:' + cv.phone"
+            class="py-2 px-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-white/10 text-zinc-200 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors"
+          >
+            <mat-icon class="text-base leading-none">phone</mat-icon>
+            <span>Call 01684937787</span>
+          </a>
+        </div>
+
+        <!-- Copy Link -->
+        <button
+          type="button"
+          (click)="copyLink()"
+          class="w-full py-2 px-3 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 text-zinc-300 hover:text-white text-xs font-medium flex items-center justify-center gap-1.5 transition-colors border border-white/5"
+        >
+          <mat-icon class="text-base leading-none">content_copy</mat-icon>
+          <span>Copy Portfolio Link to Clipboard</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+}
